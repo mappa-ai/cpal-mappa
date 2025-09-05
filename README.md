@@ -1,3 +1,5 @@
+Latest cpal (with patches) and screencapturekit support
+
 # CPAL - Cross-Platform Audio Library
 
 [![Actions Status](https://github.com/RustAudio/cpal/workflows/cpal/badge.svg)](https://github.com/RustAudio/cpal/actions)
