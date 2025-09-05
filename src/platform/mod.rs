@@ -620,8 +620,23 @@ mod platform_impl {
 
 #[cfg(any(target_os = "macos", target_os = "ios"))]
 mod platform_impl {
-    pub use crate::host::coreaudio::Host as CoreAudioHost;
-    impl_platform_host!(CoreAudio => CoreAudioHost);
+    pub use crate::host::coreaudio::{
+        Device as CoreAudioDevice, Devices as CoreAudioDevices, Host as CoreAudioHost,
+        Stream as CoreAudioStream, SupportedInputConfigs as CoreAudioSupportedInputConfigs,
+        SupportedOutputConfigs as CoreAudioSupportedOutputConfigs,
+    };
+    #[cfg(any(target_os = "macos"))]
+    pub use crate::host::screencapturekit::{
+        Device as ScreenCaptureKitDevice, Devices as ScreenCaptureKitDevices,
+        Host as ScreenCaptureKitHost, Stream as ScreenCaptureKitStream,
+        SupportedInputConfigs as ScreenCaptureKitSupportedInputConfigs,
+        SupportedOutputConfigs as ScreenCaptureKitSupportedOutputConfigs,
+    };
+
+    impl_platform_host!(
+        CoreAudio => CoreAudioHost,
+        #[cfg(any(target_os = "macos"))] ScreenCaptureKit => ScreenCaptureKitHost
+    );
 
     /// The default host for the current compilation target platform.
     pub fn default_host() -> Host {

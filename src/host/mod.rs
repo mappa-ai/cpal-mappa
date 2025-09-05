@@ -24,6 +24,8 @@ pub(crate) mod emscripten;
 ))]
 pub(crate) mod jack;
 pub(crate) mod null;
+#[cfg(target_os = "macos")]
+pub(crate) mod screencapturekit;
 #[cfg(windows)]
 pub(crate) mod wasapi;
 #[cfg(all(target_arch = "wasm32", feature = "wasm-bindgen"))]
